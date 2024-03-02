@@ -1,6 +1,8 @@
 ﻿services:
   kalkulatorwilks:
     image: kalkulatorwilks
+    depends_on: 
+      - "Kalkulator-db"
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,7 +19,7 @@
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
     ports:
-      - 5433:5432
+      - 5432:5432
     networks: 
       - Kalkulator-Network
 networks:

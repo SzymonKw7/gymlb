@@ -1,8 +1,11 @@
 using KalkulatorWILKS.Persistance;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog((builderContext, configuration) =>
+    configuration.ReadFrom.Configuration(builderContext.Configuration));
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();

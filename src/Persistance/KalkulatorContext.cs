@@ -5,6 +5,10 @@ namespace KalkulatorWILKS.Persistance;
 
 public class KalkulatorContext : DbContext
 {
+    public KalkulatorContext(DbContextOptions<KalkulatorContext> options) : base(options)
+    {
+    }
+    
     public DbSet<User> Users => Set<User>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
