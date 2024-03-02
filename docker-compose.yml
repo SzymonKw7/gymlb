@@ -1,0 +1,25 @@
+﻿services:
+  kalkulatorwilks:
+    image: kalkulatorwilks
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - ASPNETCORE_URLS=http://*:8080
+  
+  Kalkulator-db:
+    image: postgres
+    container_name: Kalkulator-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5433:5432
+    networks: 
+      - Kalkulator-Network
+networks:
+  Kalkulator-Network:
+    driver: bridge

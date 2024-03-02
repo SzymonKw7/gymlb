@@ -1,8 +1,14 @@
+using KalkulatorWILKS.Persistance;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+var connectionStrings = builder.Configuration.GetConnectionString("Kalkulator-DB");
+builder.Services.AddNpgsql<KalkulatorContext>(connectionStrings);
 
 var app = builder.Build();
 
@@ -23,5 +29,9 @@ app.MapControllerRoute(
     pattern: "{controller}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
+
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetService<KalkulatorContext>();
+context!.Database.Migrate();
 
 app.Run();
