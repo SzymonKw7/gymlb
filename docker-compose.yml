@@ -2,7 +2,7 @@
   kalkulatorwilks:
     image: kalkulatorwilks
     depends_on: 
-      - "Kalkulator-db"
+      - "database"
     build:
       context: .
       dockerfile: Dockerfile
@@ -10,16 +10,20 @@
       - 8080:8080
     environment:
       - ASPNETCORE_URLS=http://*:8080
+    networks:
+      - Kalkulator-Network
   
-  Kalkulator-db:
-    image: postgres
-    container_name: Kalkulator-db
+  database:
+    image: postgres:latest
+    container_name: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+    volumes:
+      - ./volumes/data/db:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5432
     networks: 
       - Kalkulator-Network
 networks:
