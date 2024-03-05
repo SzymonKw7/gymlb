@@ -34,9 +34,10 @@ public class UserRepository : IUserRepository
         var newUser = new User
         {
             Name = user.Name,
-            Surname = user.Surname,
-            Email = user.Email,
-            DateOfBirth = user.DateOfBirth,
+            Weight = user.Weight,
+            Height = user.Height,
+            ProfilePicture = user.ProfilePicture,
+            IsMale = user.IsMale,
             Score = user.Score
         };
 

@@ -1,3 +1,3 @@
 namespace KalkulatorWILKS.request;
 
-public record AddUserDto(string Name, string Surname, string Email, DateTime DateofBirth, bool isMale, double BodyWeight, double WeightLifted);
+public record AddUserDto(string Name, double Height, IFormFile? ProfilePicture, bool IsMale, double BodyWeight, double WeightLifted);

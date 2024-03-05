@@ -3,6 +3,7 @@ using System;
 using KalkulatorWILKS.Persistance;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KalkulatorWILKS.Migrations
 {
     [DbContext(typeof(KalkulatorContext))]
-    partial class KalkulatorContextModelSnapshot : ModelSnapshot
+    [Migration("20240305103045_AddPicWithOtherData")]
+    partial class AddPicWithOtherData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,20 +31,18 @@ namespace KalkulatorWILKS.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("Category")
-                        .HasColumnType("integer");
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("Height")
                         .HasColumnType("double precision");
-
-                    b.Property<bool>("IsMale")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<byte[]>("ProfilePicture")
+                        .IsRequired()
                         .HasColumnType("bytea");
 
                     b.Property<double?>("Score")
@@ -49,6 +50,9 @@ namespace KalkulatorWILKS.Migrations
 
                     b.Property<double>("Weight")
                         .HasColumnType("double precision");
+
+                    b.Property<bool>("isMale")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
