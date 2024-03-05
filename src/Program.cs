@@ -1,4 +1,8 @@
 using KalkulatorWILKS.Persistance;
+using KalkulatorWILKS.Repositories;
+using KalkulatorWILKS.Repositories.Interfaces;
+using KalkulatorWILKS.Services;
+using KalkulatorWILKS.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -12,6 +16,9 @@ builder.Services.AddControllersWithViews();
 
 var connectionStrings = builder.Configuration.GetConnectionString("Kalkulator-DB");
 builder.Services.AddNpgsql<KalkulatorContext>(connectionStrings);
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
