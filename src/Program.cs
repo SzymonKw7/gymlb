@@ -1,3 +1,4 @@
+using KalkulatorWILKS.Extensions;
 using KalkulatorWILKS.Persistance;
 using KalkulatorWILKS.Repositories;
 using KalkulatorWILKS.Repositories.Interfaces;
@@ -47,5 +48,7 @@ app.MapFallbackToFile("index.html");
 using var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetService<KalkulatorContext>();
 context!.Database.Migrate();
+
+app.SeedDatabase();
 
 app.Run();

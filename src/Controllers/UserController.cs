@@ -33,7 +33,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUser(AddUserDto dto, CancellationToken ct)
+    public async Task<IActionResult> AddUser([FromForm]AddUserDto dto, CancellationToken ct)
     {
         var isCompleted = await _service.CreateUserAsync(dto, ct);
 
