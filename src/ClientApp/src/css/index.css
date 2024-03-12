@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     /* colors */
-    --c-text: #FFFFFF;
-    --c-bg: #090701;
-    --c-detal: #FFD800;
+    --c-text: #ffffff;
+    --c-bg: #0a0807;
+    --c-detal: #ffd800;
     --c-female: #DD53CE;
     --c-male: #59A9F2;
 
     /* fonts */
-    --f-main: "Sarabun", sans-serif;
+    --f-main: "Poppins", sans-serif;
 
     /*  global styling  */
+    font-size: clamp(12px, 2dvw, 24px);
     font-family: var(--f-main);
     font-weight: 700;
 }
@@ -28,7 +29,32 @@ html {
 
 body {
     width: 100dvw;
-    min-height: 100dvh;
-    background-color: var(--c-bg);
+    height: 100dvh;
+    background-image: url("/public/bg.svg");
+    background-size: cover;
     color: var(--c-text);
+}
+
+h1 {
+    font-size: 4.210rem;
+}
+
+h2 {
+    font-size: 3.158rem;
+}
+
+h3 {
+    font-size: 2.369rem;
+}
+
+h4 {
+    font-size: 1.777rem;
+}
+
+h5 {
+    font-size: 1.333rem;
+}
+
+small {
+    font-size: 0.750rem;
 }
