@@ -1,0 +1,69 @@
+.participant {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 40rem;
+    height: 7rem;
+}
+
+.participant img, .participant span.imageBorder {
+    display: block;
+    position: absolute;
+    left: 0;
+    z-index: 11;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%;
+    translate: -1.7rem 0;
+}
+
+.participant span.imageBorder {
+    z-index: 9;
+}
+
+.participant div.textCon {
+    position: relative;
+    z-index: 10;
+    padding: 0 3rem 0 6.5rem;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2rem;
+    background-image: var(--g-standard);
+}
+
+.participant h5 {
+    font-weight: 400;
+}
+
+.participant:first-of-type {
+    height: 9rem;
+    max-width: 44rem;
+}
+
+.participant:first-of-type span.imageBorder {
+    height: calc(100% + 0.8rem);
+    background-color: var(--c-detal);
+    translate: -2.6rem 0;
+}
+
+.participant:first-of-type img {
+    translate: -2.2rem 0;
+}
+
+.participant:first-of-type div.textCon {
+    padding: 0 3rem 0 8rem;
+    box-shadow: 1rem 0 0 0.1rem var(--c-detal);
+}
+
+.participant:first-of-type h5 {
+    font-weight: 700;
+    font-size: 1.7rem;
+}
+

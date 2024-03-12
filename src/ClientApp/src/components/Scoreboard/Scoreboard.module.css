@@ -1,0 +1,19 @@
+.scoreboard {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+    gap: 2rem;
+    width: 80dvw;
+    height: 100%;
+    padding: 5rem 0;
+    overflow-y: scroll;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 2rem, rgba(0, 0, 0, 1) 4rem, rgba(0, 0, 0, 1) calc(100% - 4rem), rgba(0,0,0,0) calc(100% - 2rem));
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    gap: 3rem;
+}
