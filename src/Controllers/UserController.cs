@@ -2,7 +2,6 @@ using KalkulatorWILKS.Persistance.Models;
 using KalkulatorWILKS.request;
 using KalkulatorWILKS.Services.Interfaces;
 using KalkulatorWILKS.Wrapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KalkulatorWILKS.Controllers;
@@ -45,5 +44,18 @@ public class UserController : ControllerBase
         {
             return BadRequest();
         }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(Guid id, CancellationToken ct)
+    {
+        var isCompleted = await _service.DeleteUserAsync(id, ct);
+
+        if (isCompleted)
+        {
+            return NoContent();
+        }
+
+        return NotFound();
     }
 }

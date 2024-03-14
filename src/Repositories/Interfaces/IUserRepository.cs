@@ -9,4 +9,5 @@ public interface IUserRepository
     Task<User> GetUserByIdAsync(Guid id, CancellationToken ct);
     Task<bool> AddUser(User user, CancellationToken ct);
     Task<bool> UpdateUser(Guid id, double score, CancellationToken ct);
+    Task<bool> DeleteUser(Guid id, CancellationToken ct);
 }

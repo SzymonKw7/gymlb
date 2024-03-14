@@ -112,4 +112,16 @@ public class UserService : IUserService
 
         return false;
     }
+
+    public async Task<bool> DeleteUserAsync(Guid id, CancellationToken ct)
+    {
+        var isCompleted = await _repository.DeleteUser(id, ct);
+
+        if (isCompleted)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

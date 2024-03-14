@@ -1,7 +1,6 @@
 using KalkulatorWILKS.Persistance;
 using KalkulatorWILKS.Persistance.Models;
 using KalkulatorWILKS.Repositories.Interfaces;
-using KalkulatorWILKS.request;
 using Microsoft.EntityFrameworkCore;
 
 namespace KalkulatorWILKS.Repositories;
@@ -65,6 +64,21 @@ public class UserRepository : IUserRepository
 
         if (_db.SaveChangesAsync(ct).IsCompletedSuccessfully)
         {
+            return true;
+        }
+
+        return false;
+    }
+
+    public async Task<bool> DeleteUser(Guid id, CancellationToken ct)
+    {
+        var user = await _db.Users.SingleOrDefaultAsync(u => u.Id == id, ct);
+
+        if (user is not null)
+        {
+            _db.Users.Remove(user);
+
+            await _db.SaveChangesAsync(ct);
             return true;
         }
 
