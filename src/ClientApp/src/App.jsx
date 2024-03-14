@@ -1,14 +1,18 @@
 import "./css/App.css";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
-import AddParticipant from "./components/AddParticipant/AddParticipant";
-import ParticipantList from "./components/ParticipantList/ParticipantList";
+import AddUser from "./components/AddUser/AddUser";
+import UserList from "./components/ParticipantList/UserList";
 import CalculatorWILKS from "./components/CalculatorWILKS/CalculatorWILKS";
 import UpdatedScoreboard from "./components/Scoreboard/UpdatedScoreboard";
 import {AnimatePresence} from "framer-motion";
+import {useState} from "react";
 
 function App() {
     const location = useLocation();
+
+    const [userData, setUserData] = useState({});
+    const [image, setImage] = useState(null);
 
     return <AnimatePresence mode={"wait"}>
         <Routes location={location} key={location.pathname}>
@@ -16,10 +20,12 @@ function App() {
                 <Route index element={<Scoreboard/>}/>
                 <Route path={":id"} element={<UpdatedScoreboard/>}/>
             </Route>
-            <Route path={"/calc"} element={<CalculatorWILKS/>}/>
+            <Route path={"/calc"}>
+                <Route index element={<CalculatorWILKS userData={userData} userImage={image}/>}/>
+            </Route>
             <Route path={"/participants"}>
-                <Route index element={<ParticipantList/>}/>
-                <Route path={"add"} element={<AddParticipant/>}/>
+                <Route index element={<UserList/>}/>
+                <Route path={"add"} element={<AddUser handleUserDataChange={setUserData} handleImageChange={setImage} userImage={image}/>}/>
             </Route>
             <Route path={"*"} element={<Navigate to={"/scoreboard"}/>}/>
         </Routes>

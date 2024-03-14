@@ -1,9 +1,9 @@
 import AnimatedMain from "../AnimatedMain/AnimatedMain";
 
-function UpdatedScoreboard(){
+function UserList() {
     return <AnimatedMain>
-         <h1>Updated Scoreboard</h1>
+        <h1>Lista uczestników</h1>
     </AnimatedMain>
 }
 
-export default UpdatedScoreboard;
+export default UserList;

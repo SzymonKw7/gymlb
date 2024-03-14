@@ -1,14 +1,15 @@
-import AnimatedMain from "../../AnimatedMain/AnimatedMain";
+import AnimatedMain from "../AnimatedMain/AnimatedMain";
 import {useEffect, useState} from "react";
 import unknown from "../../assets/Unknown_person.jpg";
 import styles from "./Scoreboard.module.css";
 import ScoreboardListElement from "./ScoreboardListElement/ScoreboardListElement";
+import {Link} from "react-router-dom";
 
 function Scoreboard() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-    fetch("User").then(response => response.json()).then(res => res.data.sort((a, b) => b.score - a.score)).then(res => setUsers(res)).catch(err => console.error(err));
+        fetch("User").then(response => response.json()).then(res => res.data.sort((a, b) => b.score - a.score)).then(res => setUsers(res)).catch(err => console.error(err));
     }, []);
 
     return <AnimatedMain>
@@ -18,9 +19,9 @@ function Scoreboard() {
                                                                                   image={user.profilePicture || unknown}
                                                                                   name={user.name}
                                                                                   points={user.score}/>) : null}
-        < /section>
+        </section>
         <footer className={styles.footer}>
-            <h3>Czym jest<br/><h2 className="detal">WILKS?</h2></h3>
+            <h3>Czym jest<br/>&nbsp;<span className={styles.wilks}>WILKS?</span></h3>
             <h5>To matematyczny współczynnik<br/><span className={"regular"}>do pomiaru</span> <span
                 className={"detal"}>względnych sił.</span><br/><span className={"regular"}>Dzięki niemu jesteśmy w stanie sklasyfikować</span><br/>
                 wszystkich uczestników razem,<br/><span
@@ -29,6 +30,10 @@ function Scoreboard() {
             <h5><span className={"regular"}>Wynik obliczamy na podstawie</span><br/>wagi zawodnika i wyciśniętego
                 ciężaru.</h5>
         </footer>
+        <Link to={"/participants/add"} className={styles.addNewScore}>
+            <span></span>
+            <span></span>
+        </Link>
     </AnimatedMain>
 }
 
