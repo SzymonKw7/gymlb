@@ -1,4 +1,6 @@
 using KalkulatorWILKS.Extensions;
+using KalkulatorWILKS.Helpers;
+using KalkulatorWILKS.Helpers.interfaces;
 using KalkulatorWILKS.Persistance;
 using KalkulatorWILKS.Repositories;
 using KalkulatorWILKS.Repositories.Interfaces;
@@ -20,6 +22,8 @@ builder.Services.AddNpgsql<KalkulatorContext>(connectionStrings);
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IFileConverter, FileConverter>();
 
 builder.Services.AddSwaggerGen();
 

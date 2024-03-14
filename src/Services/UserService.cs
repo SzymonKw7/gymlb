@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using KalkulatorWILKS.Helpers.interfaces;
 using KalkulatorWILKS.Persistance.Models;
 using KalkulatorWILKS.Repositories.Interfaces;
 using KalkulatorWILKS.request;
@@ -9,10 +10,12 @@ namespace KalkulatorWILKS.Services;
 public class UserService : IUserService
 {
     private readonly IUserRepository _repository;
+    private readonly IFileConverter _converter;
 
-    public UserService(IUserRepository repository)
+    public UserService(IUserRepository repository, IFileConverter converter)
     {
         _repository = repository;
+        _converter = converter;
     }
     
     public async Task<List<User>> GetUsersAsync(CancellationToken ct)
@@ -49,30 +52,27 @@ public class UserService : IUserService
 
         if (dto.ProfilePicture is not null)
         {
-            using (var memoryStream = new MemoryStream())
+            user = new User
             {
-                await dto.ProfilePicture.CopyToAsync(memoryStream, ct);
-                
-                user = new User
-                {
-                    Name = dto.Name,
-                    Weight = dto.BodyWeight,
-                    Height = dto.Height,
-                    Score = score
-                };
-        
-                isCompleted = await _repository.AddUser(user, ct);
-            }
+                Name = dto.Name,
+                Weight = dto.BodyWeight,
+                ProfilePicture = await _converter.ConvertToByteAsync(dto.ProfilePicture, ct),
+                Height = dto.Height,
+                Score = score
+            };
         }
-        
-        user = new User
+
+        else
         {
-            Name = dto.Name,
-            Weight = dto.BodyWeight,
-            Height = dto.Height,
-            Score = score
-        };
-        
+            user = new User
+            {
+                Name = dto.Name,
+                Weight = dto.BodyWeight,
+                Height = dto.Height,
+                Score = score
+            };
+        }
+
         isCompleted = await _repository.AddUser(user, ct);
 
         if (isCompleted)
