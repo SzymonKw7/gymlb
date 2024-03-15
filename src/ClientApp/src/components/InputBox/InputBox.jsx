@@ -38,7 +38,7 @@ const LabelStyled = styled.label`
             padding: 0;
             color: transparent;
             background-color: var(--c-bg);
-            ${({userImage}) => userImage && `background-image: url(${URL.createObjectURL(userImage)})`};
+            ${({$userImage}) => $userImage ? `background-image: url(${URL.createObjectURL($userImage)})` : ""};
             background-size: cover;
             background-position: center center;
 
@@ -66,18 +66,18 @@ const LabelStyled = styled.label`
                 transition: 0.3s;
                 font-size: 1.5rem;
                 text-transform: uppercase;
-                color: ${({textColor}) => textColor ? textColor : "var(--c-text)"};
+                color: ${({$textColor}) => $textColor ? $textColor : "var(--c-text)"};
                 ${({
-                       leftOptionColor,
-                       rightOptionColor
-                   }) => (!leftOptionColor && !rightOptionColor) ? `background-color: var(--c-bg); background-image: var(--g-standard);` : ""};
+                       $leftOptionColor,
+                       $rightOptionColor
+                   }) => (!$leftOptionColor && !$rightOptionColor) ? `background-color: var(--c-bg); background-image: var(--g-standard);` : ""};
 
                 &:first-of-type {
-                    background-color: ${({leftOptionColor}) => leftOptionColor ? leftOptionColor : "var(--c-bg)"};
+                    background-color: ${({$leftOptionColor}) => $leftOptionColor ? $leftOptionColor : "var(--c-bg)"};
                 }
 
                 &:last-of-type {
-                    background-color: ${({rightOptionColor}) => rightOptionColor ? rightOptionColor : "var(--c-bg)"};
+                    background-color: ${({$rightOptionColor}) => $rightOptionColor ? $rightOptionColor : "var(--c-bg)"};
                 }
 
                 &:hover {
@@ -93,7 +93,7 @@ const LabelStyled = styled.label`
         }
 
     }
-    
+
     &:has(input[type=radio]) {
 
         & div {
@@ -107,19 +107,24 @@ const LabelStyled = styled.label`
             gap: 1rem;
         }
     }
+    
+    &:has(input[type=file]){
+        width: 100%;
+    }
 `
 
 function InputBox({
-                   title,
-                   inputType,
-                   handleOnChange,
-                   userImage,
-                   leftOption,
-                   leftOptionColor,
-                   rightOption,
-                   rightOptionColor,
-                   textColor,
-               }, ...props) {
+                      title,
+                      inputType,
+                      handleOnChange,
+                      userImage,
+                      leftOption,
+                      leftOptionColor,
+                      rightOption,
+                      rightOptionColor,
+                      textColor,
+                      ...props
+                  }) {
 
     let input = <input type={inputType} onChange={(e) => handleOnChange(e.target.value)}/>;
 
@@ -143,8 +148,8 @@ function InputBox({
         </>
     }
 
-    return <LabelStyled userImage={userImage} leftOptionColor={leftOptionColor}
-                        rightOptionColor={rightOptionColor} textColor={textColor} {...props}>
+    return <LabelStyled $userImage={userImage} $leftOptionColor={leftOptionColor}
+                        $rightOptionColor={rightOptionColor} $textColor={textColor}>
         <h5>{title}</h5>
         {input}
     </LabelStyled>

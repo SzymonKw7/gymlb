@@ -4,6 +4,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import styles from "./AddUser.module.css";
 import InputBox from "../InputBox/InputBox";
+import SubmitButtonBox from "../SubmitButton/SubmitButton";
 
 function AddUser({handleUserDataChange, handleImageChange, userImage}) {
 
@@ -12,12 +13,13 @@ function AddUser({handleUserDataChange, handleImageChange, userImage}) {
     const [name, setName] = useState("");
     const [weight, setWeight] = useState(0);
     const [height, setHeight] = useState(0);
-    const [arm, setArm] = useState(0);
+    // const [arm, setArm] = useState(0);
     const [isMale, setIsMale] = useState(true);
     const [isPro, setIsPro] = useState(true);
 
     function submitUserData() {
-        handleUserDataChange({name, weight, height, arm, isMale, isPro});
+        handleUserDataChange({name, weight, height, isMale, isPro});
+        navigate("/calc");
     }
 
     return <AnimatedMain className={styles.main}>
@@ -29,7 +31,7 @@ function AddUser({handleUserDataChange, handleImageChange, userImage}) {
             <section className={styles.section}>
                 <InputBox title={"Waga"} inputType={"number"} handleOnChange={setWeight}/>
                 <InputBox title={"Wzrost"} inputType={"number"} handleOnChange={setHeight}/>
-                <InputBox title={"Łapa"} inputType={"number"} handleOnChange={setArm}/>
+                {/*<InputBox title={"Łapa"} inputType={"number"} handleOnChange={setArm}/>*/}
             </section>
             <section className={styles.section}>
                 <InputBox title={"Imię"} inputType={"text"} handleOnChange={setName}/>
@@ -41,10 +43,7 @@ function AddUser({handleUserDataChange, handleImageChange, userImage}) {
                           textColor={"#070707"}></InputBox>
                 <InputBox title={"Kategorie"} handleOnChange={setIsPro} inputType={"radio"} leftOption={"PRO"}
                           rightOption={"NOOB"}></InputBox>
-                <label className={styles.submitButton}>
-                    <h5>&nbsp;</h5>
-                    <Link to={"/calc"} onClick={submitUserData}>Dodaj</Link>
-                </label>
+                <SubmitButtonBox text={"Dodaj"} handleOnClick={submitUserData}/>
             </section>
         </article>
     </AnimatedMain>

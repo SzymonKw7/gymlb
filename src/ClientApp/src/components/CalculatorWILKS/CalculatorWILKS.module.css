@@ -1,0 +1,31 @@
+.main {
+    gap: 4rem;
+}
+
+.section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.user {
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.3rem;
+    width: fit-content;
+    height: 20dvh;
+    max-height: 12rem;
+
+    & img {
+        height: calc(100% - 2rem);
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
