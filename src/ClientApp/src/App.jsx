@@ -2,7 +2,7 @@ import "./css/App.css";
 import {Navigate, Route, Routes, useLocation} from "react-router-dom";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
 import AddUser from "./components/AddUser/AddUser";
-import UserList from "./components/ParticipantList/UserList";
+import UserList from "./components/UserList/UserList";
 import CalculatorWILKS from "./components/CalculatorWILKS/CalculatorWILKS";
 import UpdatedScoreboard from "./components/Scoreboard/UpdatedScoreboard";
 import {AnimatePresence} from "framer-motion";
@@ -23,7 +23,7 @@ function App() {
             <Route path={"/calc"}>
                 <Route index element={<CalculatorWILKS userData={userData} userImage={image}/>}/>
             </Route>
-            <Route path={"/participants"}>
+            <Route path={"/users"}>
                 <Route index element={<UserList/>}/>
                 <Route path={"add"} element={<AddUser handleUserDataChange={setUserData} handleImageChange={setImage} userImage={image}/>}/>
             </Route>

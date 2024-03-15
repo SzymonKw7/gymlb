@@ -16,7 +16,7 @@ function Scoreboard() {
         <h1>Najsilniejsi<br/>&nbsp;<span className="detal">2024</span></h1>
         <section className={styles.scoreboard}>
             {users.length > 0 ? users.map((user, index) => <ScoreboardListElement key={user.id}
-                                                                                  image={user.profilePicture || unknown}
+                                                                                  image={(user.profilePicture) ? `data:image/png;base64,` + user.profilePicture : unknown}
                                                                                   name={user.name}
                                                                                   points={user.score}/>) : null}
         </section>
@@ -30,7 +30,7 @@ function Scoreboard() {
             <h5><span className={"regular"}>Wynik obliczamy na podstawie</span><br/>wagi zawodnika i wyciśniętego
                 ciężaru.</h5>
         </footer>
-        <Link to={"/participants/add"} className={styles.addNewScore}>
+        <Link to={"/users/add"} className={styles.addNewScore}>
             <span></span>
             <span></span>
         </Link>
