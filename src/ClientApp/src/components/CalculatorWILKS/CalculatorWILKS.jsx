@@ -5,8 +5,9 @@ import {useState} from "react";
 import styles from "./CalculatorWILKS.module.css";
 import SubmitButtonBox from "../SubmitButton/SubmitButton";
 import unknown from "../../assets/Unknown_person.jpg";
+import {useNavigate} from "react-router-dom";
 
-function postUserData(userData, userImage, weightLifted) {
+function postUserData(userData, userImage, weightLifted, navigation) {
     const formData = new FormData();
 
     formData.append("Name", userData.name);
@@ -20,12 +21,13 @@ function postUserData(userData, userImage, weightLifted) {
     fetch("User", {
         method: "POST", body: formData
     }).then(response => response.json())
-        .then(data => console.log(data))
+        .then(navigation(`/scoreboard/${userData.name}`))
         .catch(error => console.log(error));
 }
 
 function CalculatorWILKS({userData, userImage}) {
 
+    const navigation = useNavigate();
     const [liftedWeight, setLiftedWeight] = useState(0);
 
     return <AnimatedMain className={styles.main}>
@@ -38,7 +40,7 @@ function CalculatorWILKS({userData, userImage}) {
             <InputBox inputType={"number"} handleOnChange={setLiftedWeight}
                       title={(userData.isMale) ? "Wycisnął" : "Wycisnęła"}/>
         </section>
-        <SubmitButtonBox handleOnClick={() => postUserData(userData, userImage, liftedWeight)} text={"Oblicz"}/>
+        <SubmitButtonBox handleOnClick={() => postUserData(userData, userImage, liftedWeight, navigation)} text={"Oblicz"}/>
     </AnimatedMain>
 }
 

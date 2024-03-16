@@ -22,7 +22,7 @@ const SubmitButton = styled.label`
         border-radius: 1.5rem;
         border: none;
         background-color: var(--c-detal);
-        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5691526610644257) 0%, rgba(9, 9, 121, 0) 18%, rgba(0, 0, 0, 0.4767156862745098) 100%);;
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(9, 9, 121, 0) 18%, rgba(0, 0, 0, 0.4767156862745098) 100%);;
         font-size: 1.5rem;
         font-weight: 700;
         font-family: var(--f-main), sans-serif;

@@ -1,6 +1,6 @@
 import AnimatedMain from "../AnimatedMain/AnimatedMain";
 import PropTypes from "prop-types";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import styles from "./AddUser.module.css";
 import InputBox from "../InputBox/InputBox";

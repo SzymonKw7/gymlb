@@ -1,3 +1,27 @@
+# ClientApp KalukolatorWILKS
+
+## Table of Contents
+- [Browser Support](#browser-support)
+- [Components](#components)
+- [Template README](#template-readme)
+
+## Browser Support
+
+Project supports the following browsers engines:
+- Chromium
+- Webkit
+- Gecko
+
+Tested on [playwright](https://playwright.dev/).
+
+## Components
+
+[//]: # (TODO: Add components docs)
+
+<hr>
+
+# Template README
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -129,12 +153,15 @@ my-app/
     index.html
     favicon.ico
   src/
-    App.css
+    assets/
+      {images, fonts, etc.}
+    components/
+      {shared components}
+    css/
+      App.css
+      index.css
     App.jsx
-    App.test.js
-    index.css
     index.js
-    logo.svg
 ```
 
 For the project to build, **these files must exist with exact filenames**:

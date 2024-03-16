@@ -4,7 +4,6 @@ import Scoreboard from "./components/Scoreboard/Scoreboard";
 import AddUser from "./components/AddUser/AddUser";
 import UserList from "./components/UserList/UserList";
 import CalculatorWILKS from "./components/CalculatorWILKS/CalculatorWILKS";
-import UpdatedScoreboard from "./components/Scoreboard/UpdatedScoreboard";
 import {AnimatePresence} from "framer-motion";
 import {useState} from "react";
 
@@ -18,7 +17,7 @@ function App() {
         <Routes location={location} key={location.pathname}>
             <Route path={"/scoreboard"}>
                 <Route index element={<Scoreboard/>}/>
-                <Route path={":id"} element={<UpdatedScoreboard/>}/>
+                <Route path={":name"} element={<Scoreboard/>}/>
             </Route>
             <Route path={"/calc"}>
                 <Route index element={<CalculatorWILKS userData={userData} userImage={image}/>}/>

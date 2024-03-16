@@ -15,10 +15,38 @@ function Scoreboard() {
     return <AnimatedMain>
         <h1>Najsilniejsi<br/>&nbsp;<span className="detal">2024</span></h1>
         <section className={styles.scoreboard}>
-            {users.length > 0 ? users.map((user, index) => <ScoreboardListElement key={user.id}
-                                                                                  image={(user.profilePicture) ? `data:image/png;base64,` + user.profilePicture : unknown}
-                                                                                  name={user.name}
-                                                                                  points={user.score}/>) : null}
+            {users.length > 0 ? users.map((user, index) => {
+                let imageURL;
+
+                switch (user.image.charAt(0)) {
+                    case "/":
+                        imageURL = "data:image/jpeg;base64," + user.image;
+                        break;
+                    case "i":
+                        imageURL = "data:image/png;base64," + user.image;
+                        break;
+                    case "R":
+                        imageURL = "data:image/gif;base64," + user.image;
+                        break;
+                    case "U":
+                        imageURL = "data:image/webp;base64," + user.image;
+                        break;
+                    case "J":
+                        imageURL = "data:image/pdf;base64," + user.image;
+                        break;
+                    case "P":
+                        imageURL = "data:image/svg+xml;base64," + user.image;
+                        break;
+                    case "T":
+                        imageURL = "data:image/tiff;base64," + user.image;
+                        break;
+                    default:
+                        imageURL = unknown;
+                }
+
+                return <ScoreboardListElement key={user.id} image={imageURL} name={user.name} points={user.score}/>
+            }) : null
+            }
         </section>
         <footer className={styles.footer}>
             <h3>Czym jest<br/>&nbsp;<span className={styles.wilks}>WILKS?</span></h3>

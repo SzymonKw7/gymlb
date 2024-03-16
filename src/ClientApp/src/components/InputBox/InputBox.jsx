@@ -24,6 +24,7 @@ const LabelStyled = styled.label`
         color: var(--c-text);
         font-size: 2rem;
         outline: none;
+        cursor: pointer;
 
         &::-webkit-outer-spin-button,
         &::-webkit-inner-spin-button {
@@ -31,9 +32,15 @@ const LabelStyled = styled.label`
             margin: 0;
         }
 
+        &[type=number] {
+            -moz-appearance: textfield;
+        }
+
         &[type=file] {
-            width: unset;
-            aspect-ratio: 1/1;
+            width: calc(20dvh - 2rem);
+            max-width: 10rem;
+            max-height: calc(100% - 2rem);
+            aspect-ratio: 1 / 1;
             border-radius: 50%;
             padding: 0;
             color: transparent;
@@ -107,8 +114,8 @@ const LabelStyled = styled.label`
             gap: 1rem;
         }
     }
-    
-    &:has(input[type=file]){
+
+    &:has(input[type=file]) {
         width: 100%;
     }
 `
