@@ -18,30 +18,34 @@ function Scoreboard() {
             {users.length > 0 ? users.map((user, index) => {
                 let imageURL;
 
-                switch (user.image.charAt(0)) {
-                    case "/":
-                        imageURL = "data:image/jpeg;base64," + user.image;
-                        break;
-                    case "i":
-                        imageURL = "data:image/png;base64," + user.image;
-                        break;
-                    case "R":
-                        imageURL = "data:image/gif;base64," + user.image;
-                        break;
-                    case "U":
-                        imageURL = "data:image/webp;base64," + user.image;
-                        break;
-                    case "J":
-                        imageURL = "data:image/pdf;base64," + user.image;
-                        break;
-                    case "P":
-                        imageURL = "data:image/svg+xml;base64," + user.image;
-                        break;
-                    case "T":
-                        imageURL = "data:image/tiff;base64," + user.image;
-                        break;
-                    default:
-                        imageURL = unknown;
+                if (user.profilePicture === null) {
+                    imageURL = unknown;
+                } else {
+                    switch (Array.from(user.profilePicture)[0]) {
+                        case "/":
+                            imageURL = "data:image/jpeg;base64," + user.profilePicture;
+                            break;
+                        case "i":
+                            imageURL = "data:image/png;base64," + user.profilePicture;
+                            break;
+                        case "R":
+                            imageURL = "data:image/gif;base64," + user.profilePicture;
+                            break;
+                        case "U":
+                            imageURL = "data:image/webp;base64," + user.profilePicture;
+                            break;
+                        case "J":
+                            imageURL = "data:image/pdf;base64," + user.profilePicture;
+                            break;
+                        case "P":
+                            imageURL = "data:image/svg+xml;base64," + user.profilePicture;
+                            break;
+                        case "T":
+                            imageURL = "data:image/tiff;base64," + user.profilePicture;
+                            break;
+                        default:
+                            imageURL = unknown;
+                    }
                 }
 
                 return <ScoreboardListElement key={user.id} image={imageURL} name={user.name} points={user.score}/>
