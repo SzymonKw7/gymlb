@@ -1,8 +1,8 @@
 import styles from "./ScoreboardListElement.module.css";
 import PropTypes from "prop-types";
 
-function ScoreboardListElement({image, name, points}) {
-    return <div className={styles.participant}>
+function ScoreboardListElement({image, name, points, isNew, handleRef, ...props}) {
+    return <div className={`${styles.participant} ${isNew ? styles.newUser : ""}`} ref={isNew ? handleRef : null} {...props}>
         <span className={styles.imageBorder}></span>
         <img src={image} alt={name}/>
         <div className={styles.textCon}>
