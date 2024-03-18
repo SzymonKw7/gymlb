@@ -5,6 +5,7 @@ import {useState} from "react";
 import styles from "./AddUser.module.css";
 import InputBox from "../InputBox/InputBox";
 import SubmitButtonBox from "../SubmitButton/SubmitButton";
+import backArrow from "../../assets/return-up-back-outline.png";
 
 function AddUser({handleUserDataChange, handleImageChange, userImage}) {
 
@@ -24,7 +25,7 @@ function AddUser({handleUserDataChange, handleImageChange, userImage}) {
 
     return <AnimatedMain className={styles.main}>
         <header className={styles.header}>
-            <span className={styles.backButton} onClick={() => (navigate(-1))}>Back</span>
+            <img src={backArrow} alt={"back"} className={styles.backButton} onClick={() => (navigate(-1))} />
             <h2>Dodaj <span className={"detal"}>Uczestnika</span></h2>
         </header>
         <article className={styles.formCon}>

@@ -10,8 +10,10 @@
 .backButton{
     position: absolute;
     left: 0;
-    top: 50%;
-    translate: 0 -50%;
+    top: 0;
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
     cursor: pointer;
 }
 

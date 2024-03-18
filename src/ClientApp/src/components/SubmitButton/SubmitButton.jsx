@@ -11,6 +11,8 @@ const SubmitButton = styled.label`
     height: 20dvh;
     max-height: 12rem;
     background-color: transparent;
+    opacity: ${props => props.$visible ? 1 : 0};
+    transition: opacity 0.5s ease-in-out;
 
     & button {
         display: flex;
@@ -32,8 +34,8 @@ const SubmitButton = styled.label`
     }
 `;
 
-function SubmitButtonBox({handleOnClick, text, ...props}) {
-    return <SubmitButton {...props}>
+function SubmitButtonBox({handleOnClick, text, isVisible, ...props}) {
+    return <SubmitButton $visible={isVisible} {...props}>
         <h5>&nbsp;</h5>
         <button onClick={handleOnClick}>{text}</button>
     </SubmitButton>
@@ -41,7 +43,8 @@ function SubmitButtonBox({handleOnClick, text, ...props}) {
 
 SubmitButtonBox.propTypes = {
     handleOnClick: PropTypes.func,
-    text: PropTypes.string
+    text: PropTypes.string,
+    isVisible: PropTypes.bool,
 }
 
 export default SubmitButtonBox;

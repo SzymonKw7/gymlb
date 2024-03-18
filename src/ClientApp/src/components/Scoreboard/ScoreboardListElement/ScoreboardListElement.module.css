@@ -4,10 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-flow: row nowrap;
     width: 100%;
     max-width: 40rem;
     height: 7rem;
-
 
     & img, & span.imageBorder {
         display: block;
@@ -34,26 +34,40 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-flow: row nowrap;
         border-radius: 2rem;
         background-color: var(--c-bg);
-        background-image: var(--g-standard)
+        background-image: var(--g-standard);
+
+        & h5 {
+            font-weight: 400;
+        }
     }
 
-    & h5 {
-        font-weight: 400;
-    }
 
     &:first-of-type {
         height: 9rem;
         max-width: 44rem;
 
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 12;
+            width: 5rem;
+            height: 5rem;
+            background-image: url("/src/assets/korona.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+            translate: -2.4rem -3rem;
+        }
 
         & span.imageBorder {
             height: calc(100% + 0.8rem);
             background-color: var(--c-detal);
             translate: -2.6rem 0;
         }
-
 
         & img {
             translate: -2.2rem 0;
@@ -62,17 +76,20 @@
         & div.textCon {
             padding: 0 3rem 0 8rem;
             box-shadow: 1rem 0 0 0.1rem var(--c-detal);
-        }
 
-        & h5 {
-            font-weight: 700;
-            font-size: 1.7rem;
+
+            & h5 {
+                font-weight: 700;
+                font-size: 1.7rem;
+            }
         }
     }
 
 }
 
 .newUser {
+    z-index: 20;
+
     & div.textCon {
         background-color: var(--c-detal);
         color: var(--c-bg);
