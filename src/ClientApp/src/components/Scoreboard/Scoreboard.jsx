@@ -9,6 +9,7 @@ import SlotCounter from 'react-slot-counter';
 import SubmitButton from "../SubmitButton/SubmitButton";
 import {AnimatePresence, motion} from "framer-motion";
 import PropTypes from "prop-types";
+import {animateScroll} from "react-scroll";
 
 function Scoreboard({handleImageChange}) {
 
@@ -21,6 +22,7 @@ function Scoreboard({handleImageChange}) {
 
     const [users, setUsers] = useState([]);
     const [newUserIndex, setNewUserIndex] = useState(null);
+    const [newUserScroll, setNewUserScroll] = useState(null);
     const [scrollToBottom, setScrollToBottom] = useState(false);
     const [newScore, setNewScore] = useState(null);
     const [showNewScoreDisplay, setShowNewScoreDisplay] = useState(true);
@@ -40,6 +42,13 @@ function Scoreboard({handleImageChange}) {
 
     useEffect(() => {
         if (scrollToBottom && name && newUser.current !== null) {
+            setNewUserScroll(newUser.current.getBoundingClientRect().top);
+        }
+    }, [scrollToBottom, name]);
+
+    useEffect(() => {
+        if (newUserScroll !== null && newUserIndex !== null) {
+            scoreboard.current.height = scoreboard.current.scrollHeight;
             scoreboard.current.scrollTop = scoreboard.current.scrollHeight;
             if (usersUnderNew.current.length > 0) {
                 usersUnderNew.current = usersUnderNew.current.filter(user => user !== null);
@@ -54,7 +63,7 @@ function Scoreboard({handleImageChange}) {
             }
             setNewScore(users.find(user => user.name === name).score.toFixed(2));
         }
-    }, [name, newUserIndex, scrollToBottom, users]);
+    }, [name, newUserIndex, newUserScroll, users]);
 
     useEffect(() => {
         if (newScore !== null && showNewScoreDisplay && name) {
@@ -67,7 +76,7 @@ function Scoreboard({handleImageChange}) {
 
     useEffect(() => {
         if (!showNewScoreDisplay && name && newUser.current !== null) {
-            newUser.current.style.transition = `top ${1 + (0.07 * usersUnderNew.current.length)}s, scale 0.7s, left 0.5s`;
+            newUser.current.style.transition = `top ${1 + (0.07 * usersUnderNew.current.length)}s ease-in-out, scale 0.7s, left 0.5s`;
             usersUnderNew.current.forEach(user => {
                 user.style.transition = `top ${1 + (0.07 * usersUnderNew.current.length)}s`;
             });
@@ -75,28 +84,31 @@ function Scoreboard({handleImageChange}) {
                 newUser.current.style.scale = newUserIndex === 0 ? "0.95" : "1.1";
 
                 setTimeout(() => {
-                    const interval = setInterval(() => {
-                        scoreboard.current.scrollTop = newUser.current.offsetTop - (window.innerHeight * 0.40);
-                    }, 1);
                     newUser.current.style.top = "0";
                     usersUnderNew.current.forEach(user => {
                         user.style.top = "0";
                     });
 
+                    animateScroll.scrollTo(newUserScroll - scoreboard.current.getBoundingClientRect().top - window.innerWidth * 0.15, {
+                        duration: 1000 + (0.1 * usersUnderNew.current.length * 1000),
+                        delay: 0,
+                        smooth: "easeInOutCubic",
+                        containerId: "scoreboard"
+                    });
+
                     setTimeout(() => {
                         newUser.current.style.scale = "1";
-                        clearInterval(interval);
                         newUser.current.classList.remove(scoreboardStyles.hideTop);
                     }, 1000 + (0.1 * usersUnderNew.current.length * 1000));
                 }, 1000);
             }, 500);
-            // window.history.pushState({}, "", "/scoreboard");
+            window.history.pushState({}, "", "/scoreboard");
         }
-    }, [name, showNewScoreDisplay]);
+    }, [name, newUserIndex, newUserScroll, showNewScoreDisplay]);
 
     return <AnimatedMain>
         <h1>Najsilniejsi<br/>&nbsp;<span className="detal">2024</span></h1>
-        <section ref={scoreboard} className={styles.scoreboard}>
+        <section ref={scoreboard} className={styles.scoreboard} id={"scoreboard"}>
             {users.length > 0 && users.map((user, index) => {
 
                 let imageURL;

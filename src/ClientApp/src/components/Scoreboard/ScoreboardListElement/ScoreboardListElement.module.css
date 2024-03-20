@@ -95,12 +95,26 @@
 
     & div.textCon {
         background-color: var(--c-detal);
+        background-image: linear-gradient(170deg, rgba(255, 255, 255, 1) 5%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.2) 80%);
         color: var(--c-bg);
+        box-shadow: 0 0 0.4rem 0 var(--c-text) !important;
+    }
+
+    &:first-of-type {
+
+        & div.textCon {
+            box-shadow: 0 0 0.6rem 0 var(--c-text) !important;
+        }
+
+        & span.imageBorder {
+            background-color: transparent;
+        }
     }
 }
 
 .hideTop {
     left: -0.5rem;
+    height: 7rem;
 
     & span.imageBorder {
         scale: 0;
@@ -108,7 +122,6 @@
 
     & div.textCon {
         padding: 0 3rem 0 6.5rem;
-        box-shadow: 0 0 0 0 var(--c-detal);
     }
 
     &::after {
