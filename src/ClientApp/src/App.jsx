@@ -16,8 +16,8 @@ function App() {
     return <AnimatePresence mode={"wait"}>
         <Routes location={location} key={location.pathname}>
             <Route path={"/scoreboard"}>
-                <Route index element={<Scoreboard/>}/>
-                <Route path={":name"} element={<Scoreboard/>}/>
+                <Route index element={<Scoreboard handleImageChange={setImage}/>}/>
+                <Route path={":name"} element={<Scoreboard handleImageChange={setImage}/>}/>
             </Route>
             <Route path={"/calc"}>
                 <Route index element={<CalculatorWILKS userData={userData} userImage={image}/>}/>

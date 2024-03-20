@@ -1,6 +1,7 @@
 .participant {
     flex-shrink: 0;
     position: relative;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,12 +62,14 @@
             background-size: contain;
             background-repeat: no-repeat;
             translate: -2.4rem -3rem;
+            transition: scale 0.5s;
         }
 
         & span.imageBorder {
             height: calc(100% + 0.8rem);
             background-color: var(--c-detal);
             translate: -2.6rem 0;
+            transition: scale 0.5s;
         }
 
         & img {
@@ -76,7 +79,7 @@
         & div.textCon {
             padding: 0 3rem 0 8rem;
             box-shadow: 1rem 0 0 0.1rem var(--c-detal);
-
+            transition: box-shadow 0.5s, padding 1s;
 
             & h5 {
                 font-weight: 700;
@@ -93,5 +96,22 @@
     & div.textCon {
         background-color: var(--c-detal);
         color: var(--c-bg);
+    }
+}
+
+.hideTop {
+    left: -0.5rem;
+
+    & span.imageBorder {
+        scale: 0;
+    }
+
+    & div.textCon {
+        padding: 0 3rem 0 6.5rem;
+        box-shadow: 0 0 0 0 var(--c-detal);
+    }
+
+    &::after {
+        scale: 0;
     }
 }

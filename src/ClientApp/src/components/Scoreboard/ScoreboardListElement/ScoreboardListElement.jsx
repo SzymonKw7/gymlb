@@ -1,16 +1,15 @@
 import styles from "./ScoreboardListElement.module.css";
 import PropTypes from "prop-types";
-import {motion} from "framer-motion";
 
-function ScoreboardListElement({image, name, points, handleRef, ...props}) {
-    return <motion.div className={`${styles.participant} ${handleRef ? styles.newUser : ""}`} ref={handleRef ? handleRef : null} {...props}>
+function ScoreboardListElement({image, name, points, handleRef, isNew, ...props}) {
+    return <div className={`${styles.participant} ${isNew ? styles.newUser : ""}`} ref={handleRef ? handleRef : null} {...props}>
         <span className={styles.imageBorder}></span>
         <img src={image} alt={name}/>
         <div className={styles.textCon}>
             <h5>{name}</h5>
             <h5>{+points.toFixed(2)} pkt</h5>
         </div>
-    </motion.div>
+    </div>
 }
 
 ScoreboardListElement.propTypes = {
@@ -18,6 +17,7 @@ ScoreboardListElement.propTypes = {
     name: PropTypes.string.isRequired,
     points: PropTypes.number.isRequired,
     handleRef: PropTypes.object,
+    isNew: PropTypes.bool
 };
 
 export default ScoreboardListElement;
