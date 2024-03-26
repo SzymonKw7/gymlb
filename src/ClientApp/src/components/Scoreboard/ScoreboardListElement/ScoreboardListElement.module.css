@@ -9,6 +9,10 @@
     width: 100%;
     max-width: 40rem;
     height: 7rem;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
 
     & img, & span.imageBorder {
         display: block;

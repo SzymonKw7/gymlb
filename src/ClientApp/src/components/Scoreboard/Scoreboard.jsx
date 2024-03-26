@@ -10,6 +10,7 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import {AnimatePresence, motion} from "framer-motion";
 import PropTypes from "prop-types";
 import {animateScroll} from "react-scroll";
+import UTILS from "../../utils";
 
 function Scoreboard({handleImageChange}) {
 
@@ -97,7 +98,7 @@ function Scoreboard({handleImageChange}) {
                     });
 
                     setTimeout(() => {
-                        newUser.current.style.scale = "1";
+                        newUser.current.style.scale = "1.05";
                         newUser.current.classList.remove(scoreboardStyles.hideTop);
                     }, 1000 + (0.1 * usersUnderNew.current.length * 1000));
                 }, 1000);
@@ -111,56 +112,26 @@ function Scoreboard({handleImageChange}) {
         <section ref={scoreboard} className={styles.scoreboard} id={"scoreboard"}>
             {users.length > 0 && users.map((user, index) => {
 
-                let imageURL;
-
-                if (user.profilePicture === null) {
-                    imageURL = unknown;
-                } else {
-                    switch (Array.from(user.profilePicture)[0]) {
-                        case "/":
-                            imageURL = "data:image/jpeg;base64," + user.profilePicture;
-                            break;
-                        case "i":
-                            imageURL = "data:image/png;base64," + user.profilePicture;
-                            break;
-                        case "R":
-                            imageURL = "data:image/gif;base64," + user.profilePicture;
-                            break;
-                        case "U":
-                            imageURL = "data:image/webp;base64," + user.profilePicture;
-                            break;
-                        case "J":
-                            imageURL = "data:image/pdf;base64," + user.profilePicture;
-                            break;
-                        case "P":
-                            imageURL = "data:image/svg+xml;base64," + user.profilePicture;
-                            break;
-                        case "T":
-                            imageURL = "data:image/tiff;base64," + user.profilePicture;
-                            break;
-                        default:
-                            imageURL = unknown;
-                    }
-                }
+                let imageURL = UTILS.getImageUrl(user.profilePicture);
 
                 if (name && index === newUserIndex) {
                     return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL}
-                                                  isNew={true} handleRef={newUser}
+                                                  isNew={true} handleRef={newUser} id={user.id}
                                                   onLoad={() => (index === users.length - 1) ? setScrollToBottom(true) : null}/>
                 }
 
                 if (index === users.length - 1) {
-                    return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL}
+                    return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL} id={user.id}
                                                   onLoad={() => setScrollToBottom(true)}
                                                   handleRef={(e) => usersUnderNew.current[index - newUserIndex - 1] = e}/>
                 }
 
                 if (index > newUserIndex) {
                     return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL}
-                                                  handleRef={(e) => usersUnderNew.current[index - newUserIndex - 1] = e}/>
+                                                  handleRef={(e) => usersUnderNew.current[index - newUserIndex - 1] = e} id={user.id}/>
                 }
 
-                return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL}/>
+                return <ScoreboardListElement key={index} name={user.name} points={user.score} image={imageURL} id={user.id}/>
             })}
         </section>
         <footer className={styles.footer}>
@@ -175,6 +146,7 @@ function Scoreboard({handleImageChange}) {
         </footer>
         <Link to={"/users/add"} className={styles.addNewScore}></Link>
         <AnimatePresence>
+            {!name && users.length === 0 && <motion.div initial={{opacity: 1}} animate={{opacity: 1}} exit={{opacity: 0}} className={styles.newScoreDisplay}></motion.div>}
             {name && showNewScoreDisplay &&
                 <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}
                             className={styles.newScoreDisplay} ref={newScoreDisplay}>
@@ -184,7 +156,7 @@ function Scoreboard({handleImageChange}) {
                                      startValueOnce={true} animateUnchanged={true} sequentialAnimationMode={true}
                                      duration={3} autoAnimationStart={false}/>
                         <span className={"detal"}>,</span>
-                        <SlotCounter startValue={"00"} value={(newScore % 1 * 100).toFixed(0)} startValueOnce={true}
+                        <SlotCounter startValue={"00"} value={String((newScore % 1 * 100).toFixed(0)).padStart(2, "0")} startValueOnce={true}
                                      duration={3} autoAnimationStart={false} animateUnchanged={true}/>
                     </h1>
                     <SubmitButton text={"Pokaż tebelę"} isHidden={!showNewScoreButton}

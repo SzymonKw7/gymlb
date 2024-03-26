@@ -6,6 +6,7 @@ import UserList from "./components/UserList/UserList";
 import CalculatorWILKS from "./components/CalculatorWILKS/CalculatorWILKS";
 import {AnimatePresence} from "framer-motion";
 import {useState} from "react";
+import UserDetails from "./components/UserDetails/UserDetails";
 
 function App() {
     const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
             </Route>
             <Route path={"/users"}>
                 <Route index element={<UserList/>}/>
+                <Route path={":id"} element={<UserDetails/>}/>
                 <Route path={"add"} element={<AddUser handleUserDataChange={setUserData} handleImageChange={setImage} userImage={image}/>}/>
             </Route>
             <Route path={"*"} element={<Navigate to={"/scoreboard"}/>}/>
