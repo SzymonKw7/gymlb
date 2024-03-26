@@ -28,7 +28,7 @@ function UserDetails() {
             <div className={styles.imageBlock}>
                 <img src={UTILS.getImageUrl(user.profilePicture)} alt={user.name}/>
                 <div>
-                    <h1>{user.name}</h1>
+                    <h2>{user.name}</h2>
                     <h3>
                         <span>{String(Math.floor(user.score).toFixed(0)).padStart(3, "0")}</span>
                         <span className={"detal"}>,</span>
